@@ -1,0 +1,64 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+\usepackage{algorithm,algpseudocode}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+
+
+
+\title{ CMPS 102 --- Quarter  Spring 2017 --  Homework 4}
+\author{VLADOI MARIAN}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\begin{center}
+{\bf I have read and agree to the collaboration policy.Vladoi Marian}\\
+{\bf I want to choose homework heavy option.}\\
+{\bf Name of students I worked with: Victor Shahbazian and Mitchell Etzel }
+\end{center}
+
+
+\section*{Solution to Problem 2: Cycle Cover}
+
+
+Assume we have a directed graph G(V, E). (V= nodes, E = edges). \\
+We transform the directed graph G(V, E) into a bipartide graph G' ( $V_1  \cup  V_2 $, E') as following:\\
+The nodes N of G' is made of two sets: $(V_1 == V) \ \cup (V_2 == V)$.\\
+For each node $v \in V $ we create two nodes: $v_1 $ in the set $V_1$ of the bipartide graph G' , and a related node $v_2 \in V_2 $.\\    
+For each directed edge  $e = (v_1,v_2) \in E $ of our directed graph,  we create an undirected edge $e' = (v_1, v_2) \in E'$ in our bipartide graph.\\ 
+Thus , each directed edge of G becomes an undirected edge in G'.  We use the direction of the arc in our bipartition of vertices in G' . The set $V_1$ containes the tail of the edge, and the set $V_2$ contains the head of the edge. \\
+I will use the algorithm  bipartide matching explained in class.\\ \\
+The algorithm to find a cycle cover for a given graph G: \\
+Input : Graph G (V,E)\\
+Output :  (C = cycle cover)  return C or C does not exist.\\ 
+1. Build the bipartide graph G'($V_1  \cup  V_2 $  , E') from G (as I previous described)\\
+2. Run the bipartide matching algorithm described in class. \\
+3. If the maximum matching is perfect\\
+4. $\indent $Use the informations from G' to create a cycle cover C in G\\
+5. $\indent $Return C\\
+6. Else if the maximum matching is not perfect\\
+7.$\indent$Return C does not exist\\
+ 
+\claim  A disjoint-cycle cover for G exist iff G' has a perfect matching.
+\proof We have an if and only if condition to prove. \\
+\textbf{a)} If G' has a perfect matching then a disjoint cycle cover exist.\\
+Assume G' has a perfect matching. Then we know that for each node $u_1 \in V_1$ there is an edge $e' \in E'$  matching it to $v_2 \in V_2$. The edge $e'$ corresponds to an edge $e = (u,v) \in E$. Because we have a perfect matching , there can not be another edge that include $u_1 \ or \ v_2$ in our matching. Assuming this was the case, it means that we would have two edges sharing a vertex, which is impossible. Nothing in our matching can have the edge ($v, u$) in G.  On the other hand , $v_2 \in V_2$ has a copy $v_1 \in V_1$. The node $v_1$ has to be connected, by an edge $e'$, to another node in $V_2$.This shows an important lemma: \\
+$Each \ vertex \ v \in V \ $  has indegree and outdegree 1 in the graph G' , coresponding to the perfect matching. \\
+This is true for all the vertices and it implies that: the directed subgraph in G, created by this edges, is made of directed cycles. Because of the properties of the matching, these cycles must be vertex-disjoint. \\
+\textbf{b)} If we have a disjoint cycle cover , then every vertex in covered. In the same time, every vertex has indegree and outdegree 1 in the edge cover. \\
+Assume $v$ is such a vertex. There is an edge (u, v) $\in E$ because its indegree is one. This edge is part of the cycle cover. Also , there is an edge (v, t) $\in E$ because its outdegree is one. This edge is part of the cycle cover.  Coresponding to these edges in G , we have the edges ($u_1, v_2$) and ($v_1, t_2)$ in G'. Our perfect bipartide algorithm ensure that both copies of v , ($v_1, \ and \ v_2 $) are matched. Hence a cover implies a perfect matching. \\ \\
+
+The running time:\\
+1. Building the bipartdide graph G' is done in O(m + n)\\
+2. Computing the bipartdide matching algorithm is done in O(mn)\\
+3. Creating the cycle cover in G is done in O(n)\\
+The algorithm runs in O(mn) time. 
+ 
+
+
+\end{document}

@@ -1,0 +1,73 @@
+\documentclass[11 pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+\usepackage{algorithm,algpseudocode}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+
+
+
+\title{ CMPS 102 --- Quarter  Spring 2017 --  Homework 3}
+\author{VLADOI MARIAN}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+{\bf I have read and agree to the collaboration policy.Vladoi Marian}\\
+{\bf I want to choose homework heavy option.}\\
+{\bf Name of students I worked with: Victor Shahbazian and Mitchell Etzel }
+\end{center}
+
+
+\section*{Solution to Problem 4: Graphs}
+
+
+For this problem (a. and b. ) I will use the following subroutines:\\
+1. Initialize Single Source (Graph, source)\\
+ \indent \textbf{for} each vertex v $\in $ G.V\\
+ \indent \indent v.d = $\infty$\\
+ \indent \indent $v.\pi$ = NIL\\
+ \indent s.d = 0\\
+ 2. Relax (u, v, w)\\
+ \indent \textbf{if} v.d $>$ u.d + w (u,v)\\
+ \indent \indent v.d = u.d + w(u,v)\\
+ \indent \indent $v.\pi = u $\\
+ 
+ \textbf{a)}. We know that we have a monotonic sequence.\\
+ We also know that the edge weights are unique.\\
+ The algorithm for finding the shortest path from s to every vertex in V is:
+ 1. Sort all the edges in the graph in increasing order .\\
+ 2. Initialize Single Source \\
+ 3. S = empty\\
+ 4. Q = all verices sorted in increasing order of weights\\
+ 5. relax all edges one time, going in increasing order of weights\\ \\
+ \textbf{b)}A bitonic sequence increase, decrease , increase or decrease, increase, decrease. In a bitonic sequence there can be at most two changes in direction. We know that any shortest path increase and then decrease.We also know the uniqueness property of the edge weights. To cover all types of bitonic sequences we have to make  4 passes. The Algorithm for this problem is:  
+ 1. Sort all the edges in the graph in increasing order .\\
+ 2. Initialize Single Source \\
+ 3. S = empty\\
+ 4. Q = all verices sorted in increasing order of weights\\
+ 4. make 4 passes of relaxation\\
+ 5.  pass 1 and 3 relax all edges one time, going in increasing order of weights\\
+ 6. pass 2 and 4 relax all edges one time, going in decreasing order of weights\\ \\
+ 
+ To prove the correctenss of this two algorithm I will use the Lemma 24. 15 (Path Relaxation Property) page 673 Cormen Book (Introduction to Algorithms). The lemma states:\\
+ 
+ Let G (V,E) be a weighted , directed graph with weight function w : E $\rightarrow$ R, and let s $in $ V be a source vertex. Consider any shortest path = $\{ v_0, v_1, ... v_k\}$ from s = $v_0$ to $v_k$. If G is initialized by Initialize Single Source (Graph ,s) and then a sequence of relaxation step occurs that includes , in order , relaxing the edges $(v_0, v_1 \ (v_1,v_2) \  ... \ (v_{k-1} , v_k)$ then $v_k d = \sigma (s, v_k)$ after this relation and at all time afterward. The property holds no matter what other edge relaxatios occur, including relaxations that are intermixed with relaxations of the edges of p. This lemma is proved on Cormen , page 673, by induction on number of edges.  
+ 
+After i th edge of path path p is relaxed  we have $v_i.d = \sigma (s, v_i)$\\
+ Base case i = 0, we have $v_0.d = s_d = 0 = \sigma (s,s)$ by upper bound property\\
+Assume that $v_{i-1}.d = \sigma (s, v_{i-1})$ \\
+Examine the edge $v_{i-1} , v_i$. By conerge property , after relaxing this edge , we have $v_i.d = \sigma(s,v_i)$\\ \\
+ 
+ 
+ The Total running time of both algorithms is O(V+ E lgE) because :\\
+ 1. The time to sort all the edges in the Graph is O(E lgE) = O(E lgV) (we know that $|E|$ = $O (V^2)$.\\
+ 2. Initialize Single Source has running time O(V)\\
+ 3. Each pass has running time O(E). For part a we have only one pass. For part b we have 4 passes. But this does not affect the total running time.\\
+ 4. The total running time, for both algorithms, is O(E lgE + V + E) = O (V + E lgE).\\
+ 5. Space complexity of both algorithms is O($V^2$)\\
+
+\end{document}

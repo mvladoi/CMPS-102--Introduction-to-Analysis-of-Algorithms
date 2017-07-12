@@ -1,0 +1,99 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+\usepackage{algorithm,algpseudocode}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+
+
+
+\title{ CMPS 102 --- Quarter  Spring 2017 --  Homework 1}
+\author{VLADOI MARIAN}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\begin{center}
+{\bf I have read and agree to the collaboration policy.Vladoi Marian}\\
+{\bf I want to choose homework heavy option.}\\
+{\bf Name of students I worked with: Victor Shahbazian and Mitchell Etzel }
+\end{center}
+
+
+\section*{Solution to Problem 3: Induction}
+
+\begin{enumerate}
+\item Uniform shuffling
+
+
+
+
+\begin{claim} 
+The program takes as input an array of n elements (called A)  and generates a Uniform Random Shuffle of A. Running time of this Algorithm is $O(n)$ .
+\end{claim}
+\begin{proof}
+A Permutation is a one-to-one and onto function $\pi$ : \{1,2 ...n\} $\rightarrow$ \{1,2...n\}. A permutation defines a reordering of the Array A. Because the size of the arry is n, we have n! permuations . A uniform shuffle of A , is a random permutation of its elements. Any permutation from the set of permutations S of size n! is equally probable.
+\begin{enumerate}
+\item The the algorithm produce any permutation of $A [ 1...n]$. 
+Suppose we choose one of the permutation of A from the set of permutations S, called A'. We sort in ascending order A' with a sorting algorithm. Then $A'[1] < A'[2] <... A'[n]$. We can proof that this algorithm can produce the ascending order permutation. If the algorith will randomly choos $j$ as the smallest element of the A, we get A' sorted in ascending order.
+
+
+
+\item We have to show that A' is uniformly shuffled, meaning that an element from A  is placed on index $i$ in  A' with probability $\frac{1}{n}$ were n is the size of A.
+
+
+Show that an element from A is placed in A'[i] with a probability: 
+\begin{equation*}
+ \prod_{i=1}^{n-1} \frac{n-i}{n-i+1}
+\end{equation*}
+
+We prove it by induction on array A' index (called i)
+\newline
+Base case: i = 1.
+\newline
+The first element is placed on A' with probability = $ \prod_{i=1}^{n-1} \frac{n-i}{n-i+1}$  =  
+ $\frac{n-1}{n} * \frac{n-2}{n-1}* ... \frac{1}{n-i} = \frac{1}{n}$  
+Assume for $  1 <  i \leq (k-1)  $, the probability of k-1 element of A to be placed on A' =  $\ \prod_{i=k-1}^{n-1} \frac{n-i}{n-i+1} = \frac{1}{n}$ 
+\newline
+We have to show that for $i = k$ ,  $ \prod_{i=k}^{n-1} \frac{n-i}{n-i+1} = \frac{1}{n}$  \\
+$ \prod_{i=k}^{n-1} \frac{n-i}{n-i+1}$ = $\prod_{i=k-1}^{n-1} \frac{n-i}{n-i+1}*$  $ \frac{n-k}{n-k+1}$ = $\frac{n-(k-1)}{n-(k-1)+1} * ...  \frac{1}{n-k} * \frac{n-(k)}{n-k+1}  = \frac{1}{n}$ \newline
+The algorith running time is O(n), because if we assume that A[0],...,A[ $n-1$ ] are already shuffled, we randomly select each  element A[j] from  A[i],...,A[$n-1$]and exchange it with A[i]. 
+
+ 
+
+\end{enumerate}
+
+\end{proof}
+
+
+\item Point out the error of the Induction 
+\bigskip
+
+Let B be a set of $b+1$ buses .
+\bigskip
+
+$B = \{b_1, b_2, b_3,  ... b_{n+1}$\}
+\bigskip
+
+Then when we remove a bus for the first time  we create a new set 
+\bigskip
+
+$B_1 =  \{ b_2, b_3,  ... b_{n+1}$\} = $B- \{b_1\}.$  which has b buses
+\bigskip
+
+When we remove the second time a bus we create a new set 
+\bigskip
+
+$B_2 =  \{ b_1, b_3,  ... b_{n+1}$\} = $B- \{b_2\}.$  which has b buses
+\bigskip
+
+
+The proposition being proved is false because the inductive step was not quantified properly. It should have been proved that $\forall b \geq 1  P(n) \rightarrow P(n+1)$. Instead it is proved that $\forall  b > 1 P(n) \rightarrow P(n+1)$. It is false that $P(1) \rightarrow P(2)$. It is proved only that $P(2) \rightarrow P(3), P(3) \rightarrow P(4)...$.
+
+\end{enumerate}
+
+
+\end{document}

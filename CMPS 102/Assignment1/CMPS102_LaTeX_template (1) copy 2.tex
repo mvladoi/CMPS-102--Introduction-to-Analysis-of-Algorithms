@@ -1,0 +1,94 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+\begin{document}
+
+\begin{center}
+{\bf\Large CMPS 102 --- Quarter 20XX --  Homework X}
+\end{center}
+
+\section*{Solution to Problem 1}
+
+Given input, construct a graph $G$ (as would be pictured below):
+
+%\includegraphics[width=1in]{sum.png}
+
+Note that there conditions and things. We must prove two claims.
+\begin{claim} 
+If we have a claim, then we're good.
+\end{claim}
+\begin{proof}
+Here's a detailed in depth proof of that claim. We know it's detailed and in depth because we include a lot of details and build our argument logically.
+\end{proof}
+
+\begin{claim} 
+Something something $2n$ in $G$. 
+\end{claim}
+\begin{proof}
+We prove this claim, that something something $2n$ in $G$.
+\end{proof}
+Therefore, if $2n$ in $G$ is equivalent to whether there is a sastisfying assignment. For runtime, we must build the graph and then run Ford-Fulkerson. Building the graph is $O(n(n+n))$, since there are $O(n+n+n)$ vertices, and $O(n(n+n))$ edges between child and favor/snack vertices (and they take constant time to add in). Running Ford-Fulkerson is $O(|E|*F)$. We can put an upper bound of $2n$ on the flow, since there is clearly a cut of that size coming out of the source, so we get a runtime of $O(n(n+n) * n) \Rightarrow O(n^{3})$
+
+\newpage
+
+\section*{Solution to Problem 3}
+
+
+
+Given a list of $n$ things $s_i$, and a list of $c$ other things, design an algorithm that decides whether or not it is possible to do things, and nothing has more than $\lceil \frac{n}{c} \rceil$ things. Assume that you can find ``too far" or not.
+
+Construct $G$ as follows:
+
+%\includegraphics[width=5in]{hw4prob2.png}
+
+With $G$ and if there is a max of size $n$. We must prove two claims.
+\begin{claim} 
+If there is $n$ in $G$, there is a thing. 
+\end{claim}
+\begin{proof}
+If there is $n$, there is $n$. Finally, since each has $\lceil n/c \rceil$, there are no more.
+\end{proof}
+
+
+\begin{claim} 
+If there is a thing, there is $n$ in $G$. 
+\end{claim}
+\begin{proof}
+We know that this means there are no more than $\lceil n/c \rceil$ things. So given that it exists, we have shown how to construct $2n$ in $G$.
+\end{proof}
+Therefore, the question of whether there is a $n$ in $G$ is equivalent to whether there is a thing. For runtime, $O(n*c)$, since there are $n+c+2$ and $O(nc)$ things. We can put an upper bound of $n$, so our total runtime would be $O(n^{2}c)$.
+
+
+\section*{Solution to Problem X.AA from the textbook}
+
+\textbf{(a)} Consider the following matrix:
+
+%\includegraphics{hw4prob4a.png}
+
+No matter how you rearrange the rows and columns, row 1 can contribute at most one 1 to the diagonal, and column 1 one more.
+
+\textbf{(b)}
+Define a $G$ with $x$s on the left and $y$s on the right. We connect a $i$ to a $j$ if there is $m_{ij}$. $G$ looks something like this:
+
+%\includegraphics[width=3in]{hw4prob4b.png}
+
+We claim this good if and only if $G$ has a problem we know how to solve.
+\begin{claim} 
+There is $G$. 
+\end{claim}
+\begin{proof}
+Suppose there is $G$, with $x_{i}$ matched to $y_{f(i)}$. We swap $i$ ends up in $f(i)$. Since $f$ is a one-to-one and onto function of $\{1,2,\ldots,n\}$ to $\{1,2,\ldots,n\}$, we know exactly one destination. Since $m_{i,f(i)} = 1$ for all $i$, when we send $i$ to $f(i)$, there will be $m_{f(i),f(i)}$. Since this will be true, the thing will have 1.
+\end{proof}
+\begin{claim} 
+If $M$, there is $G$. 
+\end{claim}
+\begin{proof}
+Suppose that $M$. After the swapping, $i$ has moved $f(i)$ and $j$ has moved $g(j)$. Since $f$ and $g$, if $f^{-1}(k)$ and $g^{-1}(k)$, $k$th in the thing. Note that $(x_{f^{-1}(k)}, y_{g^{-1}(k)}$, since we know that the original. If we pick these $k$, it will give us $G$. 
+\end{proof}
+
+The run-time for this would be $O(n^2)$.
+
+\end{document}

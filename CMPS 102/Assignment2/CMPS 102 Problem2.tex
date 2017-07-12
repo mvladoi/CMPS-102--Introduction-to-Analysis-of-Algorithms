@@ -1,0 +1,98 @@
+\documentclass[11 pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+\usepackage{algorithm,algpseudocode}
+\usepackage{setspace}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+
+
+
+\title{ CMPS 102 --- Quarter  Spring 2017 --  Homework 2}
+\author{VLADOI MARIAN}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{center}
+{\bf I have read and agree to the collaboration policy.Vladoi Marian}\\
+{\bf Name of students I worked with: Victor Shahbazian and Mitchell Etzel }
+
+\end{center}
+
+
+\section*{Solution to Problem 2: Divide and Conquer}
+
+The pseudocode  for the Guessing Number Algorithm:\\
+Suppose we have a function Guess (x) . If you pass a integer for x , were x is your guess, this function will return :  ”warmer”, ”colder” or ”you guessed it!”.\\
+Suppose that the integer that you have to guess is in the range 1 to n. All the integers in this range are stored in an array A that has size n. 
+a = the first number in the range; 
+b = the last number in the range; 
+c = the number we guess.
+
+
+\textbf{ GuessNumber ( A,  a =1,  b = n,  c = 1) }\\
+\begin{algorithmic}
+                \If {(Guess (c) == " you guess it ")}
+                     \State
+                      return  "It is c" ;
+                         \EndIf \newline
+                         
+                        \State d = a + b - c;       (d = the next guess)
+                         \State m= $\lceil  \frac{ (c + d) }{2}  \rceil$.  (m =  the point were we divide the array))\newline
+                      
+                          \If {( $d > c $)} 
+                          \If{ (Guess(d) == "you guess it " )}
+                          \State  return  "It is d" ;
+                       
+                          \ElsIf{( Guess(d) == "warmer")}
+                          \State GuessNumber ( A, m, b, d)  (Call recursively the function. We are looking for values in the range  $A_m \ to \ A_b $)
+                        
+                          \Else 
+                          \State GuessNumber (A, a, m , d) (Call recursively the function. We are looking for values in the range  $A_a \ to \  A_m $)
+                    
+                            \EndIf
+                            \EndIf
+                           \newline
+                            
+                            \If {( $d <  c $)}
+                          \If{ (Guess(d) == "you guess it " )}
+                          \State  return  "It is d" ;
+                          \ElsIf{( Guess(d) == "warmer")}
+                          \State GuessNumber ( A, a,  m , d) (Call recursively the function. We are looking for values in the range  $A_a\ to \  A_m $)
+                          \Else 
+                          \State GuessNumber (A, m, b , d) (Call recursively the function. We are looking for values in the range  $A_m \ to \  A_b $)
+                            \EndIf 
+                         \EndIf
+                         
+                         \end {algorithmic}
+                            
+Our first guesses are 1 and n.We consider that  (c+d)/2 = (a+b)/2 . Solving for d =  a + b - c. The way we defined c forces us to guess values between -n and 2n. c is the last number we guess and d is the new number. Using the return value of the function Guess(x), and divide and conquer aproach,  each call to function GuessNumber discard half of the values in our range. The recurrence relation is T(n/2) + O(1).      
+Solving the reccurrence relation with Master Theorem, case 3 , we get the running time of our algorithm to be O($log_2 (n)$). This algorithm takes ($log_2 (n)$) + O(1) guesses in the worst case scenario. The Space Complexity is O(n) because we can use only an Array of size n to reprezent the range of values. \\
+
+
+Proving by induction that the algorithm works.
+\begin{claim}
+Let P(n) be the assertion that algorithm guess the corect number for values in the range 1 to  n, $\forall n $.
+\end {claim}
+\begin {proof}
+
+
+Base case: In the case where n=1 , the algorith works. We have only one value in the array and this is our guess\\
+
+Inductive Step: We assume that the algorithm works for values in the range of  1 to n ,  where  $1 < n  \leq k$;\\
+We prove that the algorithm works for values in the range 1 to  k + 1;\\
+When range  of the values  is  1 to k+1 , we have 3 cases:\\
+1. if the range has only one element (the algorithm works)\\
+2. If ( Guess(x) == warmer ) we call recursively our function GuessNumber on  (k+1)/2 values.Assuming that the recursive calls work correctly, this call works too. \\
+3. If ( Guess(x) == colder ) we call recursively our function GuessNumber on  (k+1)/2 values.Assuming that the recursive calls work correctly, this call works too. \\
+The algorithm works correctly in all cases, we can conclude by induction that the algorithm guess the corect number $\forall n$ .
+\end {proof}
+
+
+
+\end{document}

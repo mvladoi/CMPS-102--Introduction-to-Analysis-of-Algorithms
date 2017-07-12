@@ -1,0 +1,69 @@
+\documentclass[11 pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+\usepackage{algorithm,algpseudocode}
+\usepackage{setspace}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+
+
+
+\title{ CMPS 102 --- Quarter  Spring 2017 --  Homework 2}
+\author{VLADOI MARIAN}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{center}
+{\bf I have read and agree to the collaboration policy.Vladoi Marian}\\
+{\bf Colaborators None }
+\end{center}
+
+
+\section*{Solution to Problem 5: Optional}
+
+The temperatures ranges from 1 to n degrees. I choose the temperature s . He is wiling to let the temperature at some t temperature or any lower temperature.\\
+
+\textbf{a. Change my mind exactly once.}\\
+The strategy  I use.\\
+
+1. Choose s to be n . \\
+2. Set integer i = 0;\\
+3. While (s ==  too warm) \\
+  \{\\
+  4. chose s to be =   $n - 2^i $.   (choose  $n- 2^0,  n - 2^1, n-2^2, ...$)\\
+  5.  increase i by one.  \\
+ ( At the end of the while loop I know that t has to be in the interval $ n - 2^i \  to \  n- 2^{i-1}$)\\
+ (I can find this interval in logn choices)
+
+\}\\
+6. Now that I know the interval. I change my mind. \\
+7. I start againg from $2^{i-1} $ to choose, one by one value , until  I would go lower than t and he would agree with s. \\
+( the last round of negociations is constant, and I claim that I finish the process  after log(n) negociations )\\
+
+
+\textbf{ b. Change my mind k times , where $k > 1$.}\\
+The strategy I use.\\
+
+1. Choose s to be n . \\
+2. Set integer i = 0;\\
+3. While ($k > 1$)\{\\
+4. While (s ==  too warm) 
+  \{\\
+  5. chose s to be =   $n - k^i $.   (choose  $n- k^0,  n - k^1, n-k^2, ...$)\\
+  6.  increase i by one.  \\
+ ( At the end of the while loop I know that t has to be in the interval $ n - k^i \  to \  n- k^{i-1}$)\\
+\}\\
+7. Now that I know the interval, t has  to be in the interval $n-k^i \ to \ n-k^{i-1}$ , I will change my mind. \\
+8. Repeat the outer while loop with k - 1 and looking in the interval $ n-k^i \ to \ n-k^{i-1}$. This means that now n = $n-k^{i-1}$\\
+\}\\
+7.When k = 1 I exit the loops,  and  I  found the range where t is. In  constant time I cheeck one by one solution in this range. \\
+(Each round of negociation $f_k(n)$  takes $log_k(n)$ negociations, for $k > 1$ .)\\
+(The total negociations = $\sum_{i=1}^{k}  log_i (n)  \ + \ constant \ time \ when\  i = 1.$
+
+
+\end{document}

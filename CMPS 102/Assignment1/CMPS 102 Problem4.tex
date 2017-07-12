@@ -1,0 +1,78 @@
+\documentclass[11pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+\usepackage{algorithm,algpseudocode}
+\usepackage{setspace}
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+
+
+
+\title{ CMPS 102 --- Quarter  Spring 2017 --  Homework 1}
+\author{VLADOI MARIAN}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\begin{center}
+{\bf I have read and agree to the collaboration policy.Vladoi Marian}\\
+{\bf I want to choose homework heavy option.}\\
+{\bf Name of students I worked with: Victor Shahbazian and Mitchell Etzel }
+\end{center}
+
+\spacing{1.3}
+\section*{Solution to Problem 4: Divide and Conquer}
+
+One of the algorith that Jack and Anthony used to find the Median book of the joint book collection could be the folowing:
+\begin{enumerate}
+ \item We have 2 sets of sorted books , J and A, each set has the size n.
+ We can find the median of this two sets in constant time. 
+\item Find  median of J set , caled j ,   j= $J[ \left \lceil{\frac{n}{2}}\right \rceil  ]$  
+ \item Find median of A set , caled a,  a = $A[ \left \lceil{\frac{n}{2}}\right \rceil  ]$ 
+ \item  If $j == a$  return j (or a) , we found the median book 
+ \item  If  $j > a$, then look for the median in the following subarrays : $J[ \left \lceil{\frac{n}{2}}\right \rceil  \ to \ (n-1) ]$ ,  $A[ 0 \ to \  \left \lceil{\frac{n}{2}}\right \rceil  ]$ 
+ \item If  $j <  a$, then look for the median in the following subarrays : $J[ 0 \ to \ \left \lceil{\frac{n}{2}}\right \rceil]$ ,  $A[  \left \lceil{\frac{n}{2}}\right \rceil \ to \ (n-1) ]$ 
+ \item Repeat the algorithm (divide and conquer) until size of both sets becomes 2
+ \item If size of the two sets  is 2, we have 4 books or 3 books  . If $J[1] \leq  A[0] \ return \  J[1], \ else \    return  \  A[0] $.\\
+
+ 
+
+  
+\end{enumerate}
+
+ Our subproblem size reduces by a factor of half and we spend only constant time to compare the    medians of J and A.The recurrence relation is : T(n) = T(n/2) + $\Theta(c)$ \\
+Initial condition: the time to find the median book in a Set of size 2 is constant\\
+T(1) = $\Theta$(1) = 1\\
+Then we apply telescoping: reducing the recurrence relation to  n/2, n/4,  …, 2\\
+T(n) = T($\frac{n}{2}$) + 1\\
+T($\frac{n}{2}$) = T($\frac{n}{4}$) + 1\\
+T($\frac{n}{4}$) = T($\frac{n}{8}$) + 1\\
+ ...........................................\\
+T(4) = T(2) + 1\\
+
+Next we sum up the terms on left and right side of the ecuation:\\
+T(n) + T($\frac{n}{2}$) + T($\frac{n}{4}$) + T($\frac{n}{8}$) ... + T(2) = T($\frac{n}{2}$) + T($\frac{n}{4}$) + T($\frac{n}{8}$) ... + T(2) + ( 1 + 1 + 1+ 1.. + 1)\\
+There are (log n) number of 1's.\\
+After canceling the terms on both side of the ecuation, we have \\
+T(n) =  T(2) + (log n)\\
+T(n) = c + log n\\
+Therefore the runing time of the algorithm is T(n) = $\Theta$ (log n)\\
+Proving by induction that the algorithm works.
+\begin{claim}
+Let P(n) be the assertion that algorithm works correctly for Sets of size n.Prove that P(n) is true for all n, then the algoritm works on all possible input Sets.
+\end{claim}
+\begin {proof}
+
+\end {proof}
+Base case: In the case where the size of the Sets is 2 , the algorith works.\\
+Inductive Step: We assume that the algorithm works for Sets of size  $\leq k$ ;\\
+We prove that the algorithm works for Sets of size k + 1;\\
+When size of the sets is k+1 , we have 3 cases:\\
+1. median of J == median of A(the algorithm works)\\
+2. median of J$>$ median of A (in this case we look for the median on $J[ \left \lceil{\frac{n}{2}}\right \rceil  \ to \ (n-1) ]$ ,  $A[ 0 \ to \  \left \lceil{\frac{n}{2}}\right \rceil  ]$ ) So assuming that the recursive calls works correctly, this call works too.\\
+3.median of J$<$ median of A (in this case we look for the median on $J[ 0 \ to \ \left \lceil{\frac{n}{2}}\right \rceil]$ ,  $A[  \left \lceil{\frac{n}{2}}\right \rceil \ to \ (n-1) ]$  ) So assuming that the recursive calls works correctly, this call works too.\\
+The inductive step works correctly in all cases, we can conclude that the algorithm works correctly.
+
+\end{document}

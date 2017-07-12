@@ -1,0 +1,79 @@
+\documentclass[11 pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+\usepackage{algorithm,algpseudocode}
+\usepackage{setspace}
+\usepackage{tikz}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+
+
+
+\title{ CMPS 102 --- Quarter  Spring 2017 --  Homework 2}
+\author{VLADOI MARIAN}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{center}
+{\bf I have read and agree to the collaboration policy.Vladoi Marian}\\
+{\bf Name of students I worked with: Victor Shahbazian and Mitchell Etzel }
+\end{center}
+
+
+\section*{Solution to Problem 3: Greedy Algorithm,}
+
+\textbf{3.a)} 
+
+We have to consider the case : 
+Mr Banks Period  of monitorization is (1, 15). \\
+We have nurses covering : N1 = (1,4), N2=(4,15) , N3 = (2,14).   The algorithm in part a, will choose (N2, N3, N1) when the optimal solution should be (N1, N3).\\
+
+
+\textbf{3.b)}  My greedy algorithm should take input a list of pairs of times $(s_i, f_i) $ for i = 1 to n. It also should take input Mr Banks Period  of monitorization ($s_p \  (start \ period), f_p \  (finish \ period))$\\ 
+For each interval $k, (  1 \leq k \leq n )$ we create a maxHeap , were we insert all the intervals that overlaps $ k $ by finishing time as key. We will choose from this MaxHeap the interval which has the latest finishing time.
+Algorithm that outputs a smallest subset of nurses that can cover the entire duration of Mr. Banks’ stay at the hospital or say that no such subset exists:\\
+
+1. Sort all the intervals in ascending order by the starting time, so that $s_1 \leq s_2 ... \leq s_n$\\
+2. Set A (that stores tha final intervals) = $\emptyset$\\
+3. Choose the interval $x$ (which starts at $s_x== s_p$ and has the latest finishing time), and add it to A\\
+4. While ($f_x \ does \ not \ equal \ f_p$ ) \\ \{ \\
+5. If x maxHeap is empty.\\
+6. Return no such subset  A exists.\\
+7. From x maxHeap pop the interval  $k$  (this interval overlap x and  has the latest finishing time).\\
+8. Add job k to A\\
+9. x = k.\\
+\} \\
+10. Return the set A.\\
+
+
+\textbf{3.c)}
+The  algorithm return the  smallest subset of nurses that can cover the entire duration of Mr. Banks’ stay at the hospital or say that no such subset exist , and the algorithm is optimal.
+\begin {proof}
+We will proof this statement using greedy stays ahead strategy.\\
+1. Suppose our gready algorithm is not optimal ( Proof by Contradiction).\\
+2. Consider an optimal Solution. We will consider the optimal solution that agrees with gready solution for as many nurses as posible.\\
+3.  Look at the first place where the optimal solution differs from the gready solution.\\
+4. Let $ i_1, i_2, i_3 , i_k $ be the nurses intervals returned by  gready algorithm.\\
+5. Let $ j_1, j_2, j_3,  j_ m $ be the nurses intervals returned by the  optimal algorithm.\\
+6. For the largest value of r ,  $i_1 = j_1, i_2 = j_2,  ... i_r = j_r$ \\
+7. If $r <  k$: .  It means that the optimal algorithm found at step (r+1) an interval that overlap the interval at step (r) and $f_{j_{r+1}} < f_{i_{r+1}}$, because our Gready Algorithm choses the interval that overlap with latest finish time.  In this case we can replace the $j_{r+1} \ with \  i_{r+1}$, and we get a contradiction because we get a optimal solution with larger r.\\
+8. If r = k , but $m > k$, we get a contradiction because our algorith stopped at the end of Mr. Banks’ period of monitorization.  
+
+\end {proof} 
+
+
+\textbf{3.d)} Running time of the algorithm.\\
+ Creating a max heap for each interval  $O (n log(b))$  where $b$  is the number of the elements in the heap. $b$  can not be greater that $n$  . This  $p$  Max heap has all the intervals that overlap the interval $p$  and return the one with the latest finish time.  I am not sure that I  can make this Max Heap  $O(nlog(n))$. \\
+ a. step 1 Sorting the intervals  is $O nlog(n)$.\\
+ b. step 2 and 3  of algorithm is $O (1).$\\
+ c. step 4 to 9 $O (1).$\\
+ Overall runnning time is O(nlog(n)).  O(n) space.
+
+
+
+\end{document}

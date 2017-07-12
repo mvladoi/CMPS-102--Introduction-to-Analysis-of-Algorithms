@@ -1,0 +1,68 @@
+\documentclass[11 pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+\usepackage{algorithm,algpseudocode}
+\usepackage{setspace}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+
+
+
+\title{ CMPS 102 --- Quarter  Spring 2017 --  Homework 2}
+\author{VLADOI MARIAN}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{center}
+{\bf I have read and agree to the collaboration policy.Vladoi Marian}\\
+{\bf Name of students I worked with: Victor Shahbazian and Mitchell Etzel }
+\end{center}
+
+
+\section*{Solution to Problem 4: Gready Algorithm}
+ Assume that the river has a begining and an end. We measure the length of the river in miles. The range of the cities that a hydro-electric power plant can cover is 20 miles. Assume that we measured, and we know the distance from the beginning of the river to each town. We save this distances in a container for each town , sorted in ascending order. Assume also that the town are scattered sparely only along the river.
+ 
+Algorithm for finding the minimum number of power plants:\\
+
+0. Sort all the town distances in ascending order.\\
+1. Start from the begining of the river.\\
+2. starting point = 0.\\
+3. number of hydro-electric power plants = 0. \\
+4. While ( you did not reach the end of the river)\\   \{ \\ 
+5.\ \ \ \ \  Find the closest towm to the starting point.\\
+6. \ \ \ \   Advance 20 miles from this town.\\
+7. \ \ \ \   Build the first hydro-electric power plant.\\
+8. \ \ \ \   Increase the hydro-electric power plants by one.\\
+9.  \ \ \ \   Increase the starting point by 40 + $\epsilon$  miles. ( because the hydro-electric power plant cover 20 miles, $\epsilon$  is the smalest distance that exceeds this range)\\
+\}\\
+10. Return the number of hydro-electric power plants .\\
+
+
+
+
+
+\begin {claim}
+The  algorithm return the minimum hydro-electric power plants, and the algorithm is optimal.
+\end {claim}
+
+\begin {proof}
+We will proof this statement using greedy stays ahead strategy.\\
+1. Suppose our gready algorithm is not optimal ( Proof by Contradiction).\\
+2. Consider an optimal Solution. We will consider the optimal solution that agrees with gready solution for as many hydro-electric power plants as posible.\\
+3.  Look at the first place where the optimal solution differs from the gready solution.\\
+4. Let $ i_1, i_2, i_3 , i_k $ be start points of the intervals covered by a power plant builded by gready algorithm.\\
+5. Let $ j_1, j_2, j_3,  j_ m $ be start points of the intervals covered by a power plant builded by optimal  algorithm.\\
+6. For the largest value of r ,  $i_1 = j_1, i_2 = j_2,  ... i_r = j_r$ \\
+7. If $r <  k$:  Notive that  $i_{r+1}$ has to be greater than $j_{r+1}$, because our Gready Algorithm find the first house uncovered .  We change the optimal solution by making $j_{r+1} = i_{r+1}$. The new optimal solution is still feasible because it covers all the towns and the number of intervals does not change. So we get a contradiction because we get a optimal solution with larger r. 
+
+8. If r = k , but $m > k$, we get a contradiction because our algorith stopped at the end of the river. 
+
+\end {proof} 
+
+Assuming that know all the town distances from the begining of the river, and we have n towns. We can sort these distances in $O (nlog(n))$. We can scan the array of town distances in $O(n)$. So the running time of this algorithm is $O (nlog(n))$.  $O(n) $ space .
+\end{document}

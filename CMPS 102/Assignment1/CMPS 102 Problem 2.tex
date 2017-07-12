@@ -1,0 +1,138 @@
+\documentclass[10 pt]{article}
+\usepackage{fullpage,amsthm,amsfonts,amssymb,epsfig,amsmath,times,amsthm}
+\usepackage{algorithm,algpseudocode}
+\usepackage{setspace}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{claim}[theorem]{Claim}
+
+
+
+
+\title{ CMPS 102 --- Quarter  Spring 2017 --  Homework 1}
+\author{VLADOI MARIAN}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+
+\begin{center}
+{\bf I have read and agree to the collaboration policy.Vladoi Marian}\\
+{\bf I want to choose homework heavy option.}\\
+{\bf Name of students I worked with: Victor Shahbazian and Mitchell Etzel }
+\end{center}
+
+
+\section*{Solution to Problem 2: Time Complexity}
+\paragraph{a)}The following functions are ranked by increasing order of growth:
+\spacing {1} 
+\large  gacrepqmobhdfsjltikn
+
+ $\sum_{i=1}^{n} \frac{1}{2}^{i}  <  \ln (\ln n)  < [log(n^2) , 14\log_3n ] <  \log^2(n) <  [\sqrt[2]{n} , 2^{\log_4 n} ] < [ n, 2^{\log n} ] < $ \\
+$  < [n \log n, \log (n!) ]  <  [n^2, 4^{\log_2 n} , \sum_{x=5}^{n} \frac{x+1}{2} ]  <  n^{\log7}  <   2^{log^2(n)}  <  \big (\frac{5}{4}\big ) ^n  <  [ 3^n , \sum_{i=1}^{n} 3^i ] $\\ 
+$ < n! $
+
+
+
+
+\textbf{g)}  $\sum_{i=1}^{n}(\frac{1}{2})^i=\intop\nolimits_{1}^{n}(\frac{1}{2})^ndn= \frac{\frac{1}{2}-2^{-n}}{\ln2}\approx\frac{1}{2^n}$ $\rightarrow $ $\sum_{i=1}^{n}(\frac{1}{2})^i<\ln\ln n$ because $\lim_{x\to\infty} \frac{\frac{\frac{1}{2}-2^{-n}}{\ln2}}{\ln\ln n}=0$
+
+\textbf{a)} $\ln\ln n\rightarrow \lim_{x\to\infty}\frac{\ln\ln n}{14\log_{3}n}=0$, $\ln\ln n<14\log_{3}n$
+
+\textbf{c)} $14\log_{3}n \rightarrow \lim_{x\to\infty}\frac{14\log_{3}n}{\log_{2}(n^2)}=\frac{7\ln2}{\ln3}$,  $14\log_{3}n\approx\log_{2}(n^2)$
+
+\textbf{r)} $\log_{2}(n^2)\rightarrow \lim_{x\to\infty}\frac{\log_{2}(n^2)}{(\log_{2}n)^2}=0$, $\log_{2}(n^2)<(\log_{2}n)^2$
+
+\textbf{e)} $(\log_{2}n)^2\rightarrow \lim_{x\to\infty}\frac{(\log_{2}n)^2}{2^{\log_{4}n}}=0$,  $(\log_{2}n)^2<2^{\log_{4}n}$
+
+\textbf{p)} $ 2^{\log_{4}n} = n^{\log_{4}2} = n^\frac{1}{2} $
+
+\textbf{q)} $ \sqrt[2]{n} = n^\frac{1}{2}$ 
+
+\textbf{m)} $2^{\log_{2}n} = n^{\log_{2}2} = n   $
+
+\textbf{o)} n
+
+\textbf{b)} $n log(n)$
+
+\textbf{h)} $log(n!) \approx nlog(n) stirling \ formula $
+
+\textbf{d)} $n^2$
+
+\textbf{f)} $ 4^{log_2n} = n ^{log_2 4} = n^2$
+
+\textbf{s)} $\sum_{x=5}^{n} \frac{x+1}{2} =  \frac{1}{4} (n^2 + 3n - 28) \rightarrow  lim_{x\to\infty} \frac{\sum_{x=5}^{n} \frac{x+1}{2}}{n^2}  = constant$
+
+\textbf{j)} $n^{log(7)} , \ log(7) > 2 $
+
+\textbf{l)} $2^{log^2(n)}$ $\ exponential >   polinominal $
+
+\textbf{t)} $ \big (\frac{5}{4}\big)^n \rightarrow  lim_{x\to\infty} \frac{2^{log^2(n)}}{ \big (\frac{5}{4}\big)^n} = 0  $
+
+\textbf{i)} $3^n ,  \   because \ 3 > \frac{5}{4}$
+
+\textbf{k)} $\sum_{i=1}^{n} 3^i = \frac{3}{2}(3^n - 1) \rightarrow  \lim_{x\to\infty} \frac{\sum_{i=1}^{n}3^i}{3^n} = \ constant$
+
+\textbf{n)} $n! \ factorial > exponential $
+
+
+\spacing{1}
+
+
+\paragraph{b)}
+\begin {claim}
+ $f(n)+g(n)=\Omega (max(f(n),g(n))) $ 
+\end {claim}
+This statement is  ALWAYS TRUE
+\begin {proof}
+Let f (n) and g(n) be asymptotically non-negative functions.\\
+Using the definition of $ \Omega $\\
+$\exists $  a positive constant $n_0$ such that  f (n) $\geq 0$  and g(n)$ \geq 0$  $ \forall n   \geq n_0$ \\
+For such n we have :\\
+$ 0 \leq  max( f (n),g(n)) \leq  min( f (n), g (n)) + max( f (n), g (n))$ \\
+But $ f(n) + g(n) = min( f (n), g (n)) + max( f (n), g (n)), $ so $  \forall n   \geq 0 $ we have : \\
+$0 \leq 1* max(f(n),g(n)) \leq  f(n)+ g(n)$ \\
+Thus $f(n)+g(n)=\Omega (max(f(n),g(n))) $, as required .
+\end {proof}
+
+\begin {claim}
+$f(n) = \omega (g(n)) \ and \ f(n) = \mathcal{O} (g(n))$
+\end {claim}
+This statement is ALWAYS  FALSE 
+\begin {proof}
+I will proof by contradiction.\\  If our statement is true , it means that $\omega((g(n)) \cap \mathcal{O}(g(n)) \ne \emptyset.$ \\
+Let g(n) be an asymptotically non negative function.\\
+Assume that f(n) $\in \omega g(n) \cap \mathcal{O} g(n). $\\
+ (1)Since f(n) = $\mathcal{O} g(n) : \ \exists \ c_1 > 0, \ \exists n_1 > 0 \ ,\forall n \geq n_1: \ 0 \leq f(n) \leq c_1g(n).$  \\
+ (2)Also since f(n) = $\omega g(n) : \ \exists \ c_2 > 0, \ \exists n_2 > 0 \ ,\forall n \geq n_2 :\ 0 \leq c_2g(n) < f(n).$  \\
+ Let $c_2 = c_1$ and m = $max(n_1, n_2)$. Then  by (1) and (2) we have :\\
+  $ 0 \leq c_1g(m) < f(m)  \leq c_1g(m)$ which implies that $c_1g(m)  \leq c_1g(m)$ , which is a contradiction.\\
+  Our assumption was false and $\omega((g(n)) \cap \mathcal{O}(g(n)) = \emptyset.$ \\
+  $f(n) = \omega (g(n)) \ and \ f(n) = \mathcal{O} (g(n))$ is false .
+ 
+ 
+\end {proof}
+
+
+
+\begin {claim}
+Either $  f(n) = \mathcal{O}(n)  \ or  \ f(n) = \Omega (g(n))  \ or \  both.$
+\end {claim}
+This statement is  ALWAYS TRUE
+\begin {proof}
+Let f (n) and g(n) be asymptotically non-negative functions.\\
+ Either is the case by definition of $ \mathcal{O}$\\
+ $\exists $   positive constants $n_1, c_1 $ such that  f (n) $\geq 0$  and g(n)$ \geq 0$  $ \forall n   \geq n_1$ \\
+$ 0 \leq  f (n) \leq  c_1 g(n)$ \\
+ Either is the case by definition of $ \Omega$\\
+ $\exists $   positive constants $n_2, c_2 $ such that  f (n) $\geq 0$  and g(n)$ \geq 0$  $ \forall n   \geq n_2$ \\
+$ 0 \leq  c_2g(n) \leq  f(n)$ \\
+Either both by the definition  of $ \Theta$\\
+ $\exists $   positive constants $ n_3 = max(n_1, n_2), c_1 ,c_2$ such that  f (n) $\geq 0$  and g(n)$ \geq 0$  $ \forall n   \geq n_3$ \\
+$ 0 \leq  c_2g(n) \leq  f(n) \leq c_1g(n)$ \\
+
+\end {proof}
+
+\end{document}
